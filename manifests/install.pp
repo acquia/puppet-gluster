@@ -33,6 +33,7 @@ class gluster::install (
   Boolean $client        = $gluster::params::install_client,
   Boolean $repo          = $gluster::params::repo,
   String $version        = $gluster::params::version,
+  String $release        = $gluster::params::release,
   String $server_package = $gluster::params::server_package,
   String $client_package = $gluster::params::client_package,
 ) inherits ::gluster::params {
@@ -41,6 +42,7 @@ class gluster::install (
     # install the correct repo
     if ! defined ( Class[::gluster::repo] ) {
       class { '::gluster::repo':
+        release => $release,
         version => $version,
       }
     }
